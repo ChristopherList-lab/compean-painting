@@ -254,6 +254,35 @@ a.trust-item:hover{color:#F08A8A}
 .quote-form input:focus,.quote-form select:focus,.quote-form textarea:focus{
   outline:2.5px solid var(--red);outline-offset:1px;border-color:var(--red);
 }
+.quote-form input.invalid,.quote-form select.invalid{
+  border-color:var(--red);background:#FDF1F1;
+}
+.quote-form .btn[aria-busy="true"]{opacity:.75;pointer-events:none}
+.form-error{
+  margin:0;padding:12px 14px;border-radius:8px;
+  background:#FDECEC;border:1.5px solid var(--red);
+  color:var(--red-deep);font-size:14.5px;font-weight:500;
+}
+.form-error a{color:var(--red-deep);font-weight:700}
+
+/* the [hidden] attribute must win over the display:grid rules below */
+.quote-form[hidden],.quote-success[hidden]{display:none}
+
+/* success state (replaces the form after submit) */
+.quote-success{
+  background:var(--paper);color:var(--tx);border-radius:14px;padding:44px 32px;
+  box-shadow:0 24px 60px rgba(0,0,0,.35);text-align:center;
+  display:grid;justify-items:center;gap:8px;
+}
+.quote-check{width:60px;height:60px;color:var(--red);margin-bottom:6px}
+.quote-check circle{opacity:.35}
+.quote-success h3{font-family:var(--display);font-size:24px}
+.quote-success p{margin:0;color:var(--tx2);max-width:38ch}
+.quote-success a{color:var(--red);font-weight:600;white-space:nowrap}
+@media (prefers-reduced-motion:no-preference){
+  .quote-check path{stroke-dasharray:48;stroke-dashoffset:48;animation:check .5s .1s ease forwards}
+}
+@keyframes check{to{stroke-dashoffset:0}}
 
 /* ---------- footer ---------- */
 .footer{background:var(--charcoal);color:#C9C4BC;padding:64px 0 28px}

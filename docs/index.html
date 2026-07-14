@@ -200,11 +200,14 @@
         <a class="quote-phone" href="tel:+15129860094">(512) 986-0094</a>
         <p class="quote-area">Serving Georgetown, Round Rock, Leander, Cedar Park, and Liberty Hill.</p>
       </div>
-      <!-- Netlify Forms: works automatically once hosted on Netlify.
-           On other hosts, point action at your form service (e.g. Formspree). -->
-      <form class="quote-form" name="estimate" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+      <!-- Lead pipeline: Netlify Forms captures every submission (email alert +
+           dashboard). To route leads into GoHighLevel, add a Netlify outbound
+           webhook on this form pointing at a GHL inbound webhook URL. Field names
+           below map to GHL contact fields. See README "Estimate pipeline". -->
+      <form class="quote-form" name="estimate" method="POST"
+            data-netlify="true" netlify-honeypot="bot-field" novalidate>
         <input type="hidden" name="form-name" value="estimate">
-        <p class="hidden"><label>Don't fill this out: <input name="bot-field"></label></p>
+        <p class="hidden" aria-hidden="true"><label>Don't fill this out: <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
         <div class="form-row">
           <label for="f-name">Name</label>
           <input id="f-name" name="name" type="text" autocomplete="name" required>
@@ -212,7 +215,8 @@
         <div class="form-row form-split">
           <div>
             <label for="f-phone">Phone</label>
-            <input id="f-phone" name="phone" type="tel" autocomplete="tel" required>
+            <input id="f-phone" name="phone" type="tel" autocomplete="tel"
+                   inputmode="tel" required>
           </div>
           <div>
             <label for="f-email">Email <span class="opt">(optional)</span></label>
@@ -236,8 +240,23 @@
           <label for="f-msg">Tell us about the job</label>
           <textarea id="f-msg" name="message" rows="4" placeholder="Rooms, square footage, timeline &mdash; whatever you know."></textarea>
         </div>
+        <p class="form-error" id="formError" role="alert" hidden>
+          Something went wrong sending that. Please call
+          <a href="tel:+15129860094">(512)&nbsp;986-0094</a> and we'll get you set up.
+        </p>
         <button class="btn btn-red btn-lg btn-full" type="submit">Request My Free Estimate</button>
       </form>
+      <div class="quote-success" id="quoteSuccess" role="status" hidden>
+        <svg class="quote-check" viewBox="0 0 52 52" aria-hidden="true">
+          <circle cx="26" cy="26" r="24" fill="none" stroke="currentColor" stroke-width="3"/>
+          <path d="M15 27l8 8 15-16" fill="none" stroke="currentColor" stroke-width="4"
+                stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <h3>Request received</h3>
+        <p>Thanks, <span id="successName">there</span>. Junior will call you back
+        shortly, usually the same day. Need it sooner? Call
+        <a href="tel:+15129860094">(512) 986-0094</a>.</p>
+      </div>
     </div>
   </section>
 </main>

@@ -1,0 +1,18 @@
+# Netlify configuration for Compean Painting.
+# When you import this repo in Netlify it reads this file and needs no build settings.
+
+[build]
+  publish = "docs"
+  # Static site, nothing to compile.
+  command = ""
+
+# Long-cache the fingerprint-free static assets but always revalidate HTML.
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
